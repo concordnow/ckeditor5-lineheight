@@ -1,0 +1,45 @@
+{
+  "name": "ckeditor5-lineheight",
+  "version": "0.0.0",
+  "description": "A ckedtior5 plugin to handle line-height functionality",
+  "main": "",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node ./node_modules/.bin/ckeditor5-dev-tests",
+    "manual": "node ./node_modules/.bin/ckeditor5-dev-tests-manual"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/concordnow/ckeditor5-lineheight.git"
+  },
+  "keywords": [
+    "ckeditor",
+    "ckeditor5",
+    "ckeditor-plugin",
+    "line-height"
+  ],
+  "author": "Concordnow Worldwide Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/concordnow/ckeditor5-lineheight/issues"
+  },
+  "homepage": "https://github.com/concordnow/ckeditor5-lineheight#readme",
+  "devDependencies": {
+    "@ckeditor/ckeditor5-dev-tests": "^16.7.1",
+    "eslint": "^6.3.0",
+    "eslint-config-ckeditor5": "^2.0.0",
+    "yarn": "^1.17.3"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-core": "^12.3.0",
+    "@ckeditor/ckeditor5-engine": "^14.0.0"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
