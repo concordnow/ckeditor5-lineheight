@@ -1,12 +1,12 @@
-ckeditor5-tabulation-converter
-============================
+ckeditor5-lineheight
+====================
 
 Installation
 ------------
 ```console
-npm install --save-dev ckeditor5-lineheight
+npm install --save-dev @concordnow/ckeditor5-lineheight
 ```
 or
 ```console
-yarn add ckeditor5-lineheight --dev
+yarn add @concordnow/ckeditor5-lineheight --dev
 ```
