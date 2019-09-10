@@ -1,5 +1,5 @@
 {
-  "name": "ckeditor5-lineheight",
+  "name": "@concordnow/ckeditor5-lineheight",
   "version": "0.0.0",
   "description": "A ckedtior5 plugin to handle line-height functionality",
   "main": "",
