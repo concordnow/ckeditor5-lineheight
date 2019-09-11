@@ -10,6 +10,7 @@ export default class LineHeightConverter extends Plugin {
 		const editor = this.editor;
 		const schema = editor.model.schema;
 		const conversion = editor.conversion;
+		const configLineHeightValue = editor.config.get( 'lineHeight' );
 
 		schema.extend( 'paragraph', {
 			allowAttributes: [ 'lineHeight' ]
@@ -31,7 +32,7 @@ export default class LineHeightConverter extends Plugin {
 					}
 
 					const lineHeight = regexp[ 1 ];
-					const value = getLineHeightNumber( lineHeight );
+					const value = getLineHeightNumber( lineHeight ) * ( configLineHeightValue || 1 );
 
 					return value;
 				}
