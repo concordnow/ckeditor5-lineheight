@@ -18,26 +18,15 @@ export default class LineHeightConverter extends Plugin {
 
 		conversion.for( 'upcast' ).attributeToAttribute( {
 			view: {
-				name: 'p',
 				key: 'style',
-				value: /line-height:(.*?)(?:;|$)/
+				value: {
+					'line-height': /[\s\S]+/
+				}
 			},
 			model: {
 				key: 'lineHeight',
 				value: viewElement => {
-					const viewElementStyle = viewElement.getAttribute( 'style' );
-
-					if ( !viewElementStyle ) {
-						return;
-					}
-
-					const regexp = viewElementStyle.match( /line-height:(.*?)(?:;|$)/ );
-
-					if ( !regexp ) {
-						return;
-					}
-
-					const lineHeight = regexp[ 1 ];
+					const lineHeight = viewElement.getStyle( 'line-height' );
 					const value = getLineHeightNumber( lineHeight ) * ( configLineHeightValue || 1 );
 
 					return value;
