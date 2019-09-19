@@ -29,8 +29,7 @@
   "devDependencies": {
     "@ckeditor/ckeditor5-dev-tests": "^16.7.1",
     "eslint": "^6.3.0",
-    "eslint-config-ckeditor5": "^2.0.0",
-    "yarn": "^1.17.3"
+    "eslint-config-ckeditor5": "^2.0.0"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-core": "^12.3.0",
