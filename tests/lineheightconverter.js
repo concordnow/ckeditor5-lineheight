@@ -3,6 +3,7 @@ import testUtils from '@ckeditor/ckeditor5-core/tests/_utils/utils';
 import { getData as getViewData } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 import { getData as getModelData } from '@ckeditor/ckeditor5-engine/src/dev-utils/model';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
+import HeadingEditing from '@ckeditor/ckeditor5-heading/src/headingediting';
 
 import LineHeightConverter from './../src/lineheightconverter';
 import { POINT_TO_PIXEL_CONVERTER, getLineHeightNumber } from './../src/utils';
@@ -22,7 +23,14 @@ describe( 'LineHeightConverter', () => {
 		beforeEach( () => {
 			return VirtualTestEditor
 				.create( {
-					plugins: [ Paragraph, LineHeightConverter ],
+					plugins: [ HeadingEditing, Paragraph, LineHeightConverter ],
+					heading: {
+						options: [
+							{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+							{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+							{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+						]
+					},
 					lineHeight: 1.2
 				} )
 				.then( newEditor => {
@@ -90,6 +98,18 @@ describe( 'LineHeightConverter', () => {
 			const lineHeightValue = getLineHeightNumber( '125%', configLineHeightValue );
 			const expectedData = `<p style="line-height:${ lineHeightValue };">foo bar</p>`;
 			const expectedViewData = `<p style="line-height:${ lineHeightValue }">foo bar</p>`;
+
+			editor.setData( data );
+
+			expect( editor.getData() ).to.equal( expectedData );
+			expect( getViewData( editor.editing.view, { withoutSelection: true } ) )
+				.to.equal( expectedViewData );
+		} );
+
+		it( 'should not convert line-height other tag than p', () => {
+			const data = '<h1 style="line-height: 1.25;">foo bar</h1>';
+			const expectedData = '<h1>foo bar</h1>';
+			const expectedViewData = '<h1>foo bar</h1>';
 
 			editor.setData( data );
 

@@ -18,6 +18,7 @@ export default class LineHeightConverter extends Plugin {
 
 		conversion.for( 'upcast' ).attributeToAttribute( {
 			view: {
+				name: 'p',
 				key: 'style',
 				value: {
 					'line-height': /[\s\S]+/
