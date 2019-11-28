@@ -27,7 +27,7 @@ export default class LineHeightConverter extends Plugin {
 				key: 'lineHeight',
 				value: viewElement => {
 					const lineHeight = viewElement.getStyle( 'line-height' );
-					const value = getLineHeightNumber( lineHeight ) * ( configLineHeightValue || 1 );
+					const value = getLineHeightNumber( lineHeight, configLineHeightValue );
 
 					return value;
 				}

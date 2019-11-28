@@ -39,50 +39,57 @@ describe( 'LineHeightConverter', () => {
 			expect( doc.schema.checkAttribute( [ 'paragraph' ], 'lineHeight' ) ).to.be.true;
 		} );
 
-		it( 'should convert pt line-height to number and check model', () => {
+		it( 'should convert pt line-height to number with no lineHeight in config', () => {
 			const data = '<p style="line-height: 12.5pt"><span>foo bar</span></p>';
-			const LineHeightValue = getLineHeightNumber( '12.5pt' );
-			const configLineHeightValue = editor.config.get( 'lineHeight' );
-			const expectedLineHeightValue = LineHeightValue * configLineHeightValue;
+			const lineHeightValue = getLineHeightNumber( '12.5pt' );
 
 			editor.setData( data );
 
-			expect( expectedLineHeightValue ).to.equal( 1.25 * configLineHeightValue );
+			expect( lineHeightValue ).to.equal( 1.25 * 1.2 );
 			expect( getModelData( doc ) )
-				.to.equal( `<paragraph lineHeight="${ expectedLineHeightValue }">[]foo bar</paragraph>` );
+				.to.equal( `<paragraph lineHeight="${ lineHeightValue }">[]foo bar</paragraph>` );
+		} );
+
+		it( 'should convert pt line-height to number and check model', () => {
+			const data = '<p style="line-height: 12.5pt"><span>foo bar</span></p>';
+			const configLineHeightValue = editor.config.get( 'lineHeight' );
+			const lineHeightValue = getLineHeightNumber( '12.5pt', configLineHeightValue );
+
+			editor.setData( data );
+
+			expect( lineHeightValue ).to.equal( 1.25 * configLineHeightValue );
+			expect( getModelData( doc ) )
+				.to.equal( `<paragraph lineHeight="${ lineHeightValue }">[]foo bar</paragraph>` );
 		} );
 
 		it( 'should convert px line-height to number and check model', () => {
 			const data = '<p style="line-height: 15px"><span>foo bar</span></p>';
-			const LineHeightValue = getLineHeightNumber( '15px' );
 			const configLineHeightValue = editor.config.get( 'lineHeight' );
-			const expectedLineHeightValue = parseFloat( ( 15 / POINT_TO_PIXEL_CONVERTER / 10 ).toFixed( 2 ) ) * configLineHeightValue;
+			const lineHeightValue = getLineHeightNumber( '15px', configLineHeightValue );
 
 			editor.setData( data );
 
-			expect( expectedLineHeightValue ).to.equal( LineHeightValue * configLineHeightValue );
-			expect( getModelData( doc ) ).to.equal( `<paragraph lineHeight="${ expectedLineHeightValue }">[]foo bar</paragraph>` );
+			expect( lineHeightValue ).to.equal( parseFloat( ( 15 / POINT_TO_PIXEL_CONVERTER / 10 * configLineHeightValue ).toFixed( 2 ) ) );
+			expect( getModelData( doc ) ).to.equal( `<paragraph lineHeight="${ lineHeightValue }">[]foo bar</paragraph>` );
 		} );
 
 		it( 'should convert percentage line-height to number and check model', () => {
 			const data = '<p style="line-height: 125%"><span>foo bar</span></p>';
-			const LineHeightValue = getLineHeightNumber( '125%' );
 			const configLineHeightValue = editor.config.get( 'lineHeight' );
-			const expectedLineHeightValue = LineHeightValue * configLineHeightValue;
+			const lineHeightValue = getLineHeightNumber( '125%', configLineHeightValue );
 
 			editor.setData( data );
 
-			expect( expectedLineHeightValue ).to.equal( 1.25 * configLineHeightValue );
-			expect( getModelData( doc ) ).to.equal( `<paragraph lineHeight="${ expectedLineHeightValue }">[]foo bar</paragraph>` );
+			expect( lineHeightValue ).to.equal( 1.25 * configLineHeightValue );
+			expect( getModelData( doc ) ).to.equal( `<paragraph lineHeight="${ lineHeightValue }">[]foo bar</paragraph>` );
 		} );
 
 		it( 'should convert percentage line-height to number and check data and edit view', () => {
 			const data = '<p style="line-height: 125%;"><span>foo bar</span></p>';
-			const LineHeightValue = getLineHeightNumber( '125%' );
 			const configLineHeightValue = editor.config.get( 'lineHeight' );
-			const expectedLineHeightValue = LineHeightValue * configLineHeightValue;
-			const expectedData = `<p style="line-height:${ expectedLineHeightValue };">foo bar</p>`;
-			const expectedViewData = `<p style="line-height:${ expectedLineHeightValue }">foo bar</p>`;
+			const lineHeightValue = getLineHeightNumber( '125%', configLineHeightValue );
+			const expectedData = `<p style="line-height:${ lineHeightValue };">foo bar</p>`;
+			const expectedViewData = `<p style="line-height:${ lineHeightValue }">foo bar</p>`;
 
 			editor.setData( data );
 
