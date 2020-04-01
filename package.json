@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/concordnow/ckeditor5-lineheight#readme",
   "devDependencies": {
-    "@ckeditor/ckeditor5-dev-tests": "^17.1.0",
+    "@ckeditor/ckeditor5-dev-tests": "^18.0.0",
     "eslint": "^5.5.0",
     "eslint-config-ckeditor5": "^2.0.0"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-core": "^16.0.0",
-    "@ckeditor/ckeditor5-engine": "^16.0.0"
+    "@ckeditor/ckeditor5-core": "^18.0.0",
+    "@ckeditor/ckeditor5-engine": "^18.0.0"
   },
   "files": [
     "src"
